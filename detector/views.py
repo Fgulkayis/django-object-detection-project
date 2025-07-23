@@ -10,7 +10,7 @@ from .yolo_detector import ObjectDetector
 
 detector_model = ObjectDetector()
 
-def upload_iamge(request):
+def upload_image(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -40,7 +40,7 @@ def upload_iamge(request):
                uploaded_image_instance.processed_image.name = os.path.join('processed_images', processed_image_name)
 
                uploaded_image_instance.save()
-               
+
                return render(request, 'detector/result.html', {'uploaded_image': uploaded_image_instance})
             
             except FileNotFoundError as e:
@@ -48,5 +48,9 @@ def upload_iamge(request):
             except Exception as e:
                  return render(request, 'detector/error.html', {'error_message': f"Nesne tanımlama sırasında bir hata oluştu: {e}"})
         else:
-            form = ImageUploadForm()
-            return render(request, 'detector/upload.html', {'from': form})
+           return render(request, 'detector/upload.html', {'form': form})
+       
+    else:
+      form = ImageUploadForm()
+      
+    return render(request, 'detector/upload.html', {'form': form})

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nesne Tanımlama Sonucu</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .image-container { display: flex; justify-content: space-around; margin-top: 30px; flex-wrap: wrap; gap: 20px; }
+        .image-box { text-align: center; margin: 10px; flex: 1 1 40%; min-width: 300px; } /* Esnekliği ayarla */
+        .image-box img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; }
+        .image-box p { font-weight: bold; margin-top: 10px; color: #555; }
+        .action-link { display: block; text-align: center; margin-top: 30px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; max-width: 200px; margin-left: auto; margin-right: auto; }
+        .action-link:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nesne Tanımlama Sonucu</h1>
+        <div class="image-container">
+            <div class="image-box">
+                <p>Orijinal Görüntü:</p>
+                {% if uploaded_image.image %}
+                    <img src="{{ uploaded_image.image.url }}" alt="Original Image">
+                {% else %}
+                    <p>Orijinal görüntü bulunamadı.</p>
+                {% endif %}
+            </div>
+            <div class="image-box">
+                <p>İşlenmiş Görüntü:</p>
+                {% if uploaded_image.processed_image %}
+                    <img src="{{ uploaded_image.processed_image.url }}" alt="Processed Image">
+                {% else %}
+                    <p>İşlenmiş görüntü bulunamadı.</p>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{% url 'detector:upload_image' %}" class="action-link">Başka bir görüntü yükle</a>
+    </div>
+</body>
+</html>
